@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900" role="img" aria-label="Luvas">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#dcfce7"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="900" rx="52" fill="url(#bg)"/>
+  <circle cx="690" cy="182" r="118" fill="#15803d" opacity=".10"/>
+  <circle cx="192" cy="690" r="146" fill="#15803d" opacity=".08"/>
+  <g transform="translate(248 212)" fill="none" stroke="#15803d" stroke-width="34" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M202 40v392"/>
+    <path d="M48 196h308"/>
+    <path d="M92 84h220a52 52 0 0 1 52 52v220a52 52 0 0 1-52 52H92a52 52 0 0 1-52-52V136a52 52 0 0 1 52-52z"/>
+    <path d="M142 304h120"/>
+  </g>
+  <text x="450" y="690" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="800" fill="#15803d">Luvas</text>
+  <text x="450" y="756" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700" fill="#334155"></text>
+</svg>

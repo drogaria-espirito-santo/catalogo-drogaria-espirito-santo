@@ -1,0 +1,37 @@
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import type { Categoria } from "@/lib/types";
+
+type CategoryCardProps = {
+  categoria: Categoria;
+};
+
+export function CategoryCard({ categoria }: CategoryCardProps) {
+  return (
+    <Link
+      href={`/categoria/${categoria.slug}`}
+      className="group overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-catalog"
+    >
+      <div className="grid grid-cols-[92px_1fr] gap-3 p-3">
+        <Image
+          src={categoria.imagem}
+          alt=""
+          width={96}
+          height={96}
+          className="h-24 w-24 rounded-md bg-slate-50 object-cover"
+          loading="lazy"
+        />
+        <div className="min-w-0 py-1">
+          <h3 className="text-base font-black leading-5 text-ink">{categoria.nome}</h3>
+          <p className="mt-2 text-sm font-semibold text-slate-500">
+            {categoria.total} produtos em {categoria.subtipos.length} subtipos
+          </p>
+          <span className="mt-4 inline-flex items-center gap-1 text-sm font-black text-emerald-700">
+            Explorar <ArrowRight size={15} className="transition group-hover:translate-x-1" />
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
