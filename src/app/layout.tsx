@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { Phone, Search } from "lucide-react";
+import { MessageCircle, Search } from "lucide-react";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -29,8 +29,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body>
-        <header className="sticky top-0 z-40 border-b border-red-600/15 bg-white/95 shadow-sm backdrop-blur">
-          <div className="h-1.5 bg-red-600" />
+        <header className="sticky top-0 z-40 bg-red-600 shadow-md">
           <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2.5 sm:px-6 lg:px-8">
             <Link href="/" className="flex min-w-0 items-center">
               <Image
@@ -45,16 +44,16 @@ export default function RootLayout({
             <div className="flex items-center gap-2">
               <Link
                 href="/#catalogo"
-                className="inline-flex h-10 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-sm font-black text-slate-700 transition hover:border-red-300 hover:text-red-700"
+                className="inline-flex h-10 items-center gap-2 rounded-lg border border-white/25 bg-white/12 px-3 text-sm font-black text-white transition hover:bg-white/20"
               >
                 <Search size={17} />
                 <span className="hidden sm:inline">Buscar</span>
               </Link>
               <a
                 href="https://wa.me/5527995050105"
-                className="inline-flex h-10 items-center gap-2 rounded-lg bg-red-600 px-3 text-sm font-black text-white shadow-sm transition hover:bg-red-700"
+                className="inline-flex h-10 items-center gap-2 rounded-lg bg-[#25D366] px-3 text-sm font-black text-white shadow-sm transition hover:bg-[#1ebe5d]"
               >
-                <Phone size={17} />
+                <MessageCircle size={17} />
                 <span className="hidden sm:inline">WhatsApp</span>
               </a>
             </div>

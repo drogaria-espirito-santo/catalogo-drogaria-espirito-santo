@@ -14,10 +14,10 @@ export default function Home() {
               Catálogo hospitalar
             </p>
             <h1 className="mt-2 text-3xl font-black leading-tight text-ink sm:text-5xl">
-              Produtos hospitalares para consulta rápida
+              Drogaria Espírito Santo
             </h1>
             <p className="mt-3 max-w-2xl text-base font-semibold leading-7 text-slate-600 sm:text-lg">
-              Encontre produtos por nome, código interno ou categoria e consulte disponibilidade direto pelo WhatsApp.
+              Encontre produtos hospitalares por nome, código interno ou categoria e consulte disponibilidade direto pelo WhatsApp.
             </p>
             <div className="mt-5 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -28,7 +28,7 @@ export default function Home() {
               </Link>
               <a
                 href="https://wa.me/5527995050105"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-5 text-sm font-black text-slate-800 transition hover:border-red-300 hover:text-red-700"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#25D366] px-5 text-sm font-black text-white shadow-lg shadow-emerald-900/15 transition hover:bg-[#1ebe5d]"
               >
                 <MessageCircle size={18} /> Falar no WhatsApp
               </a>
