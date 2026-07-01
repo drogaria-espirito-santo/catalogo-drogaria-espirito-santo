@@ -45,7 +45,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <Link
             href={`/categoria/${produto.categoriaSlug}`}
-            className="inline-flex items-center gap-2 text-sm font-black text-emerald-700"
+            className="inline-flex items-center gap-2 text-sm font-black text-red-700"
           >
             <ArrowLeft size={17} /> Voltar para {produto.categoria}
           </Link>
@@ -55,10 +55,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <div className="aspect-square overflow-hidden rounded-lg bg-white">
                 <Image
                   src={produto.imagem}
-                  alt={produto.subtipo}
+                  alt={produto.produto}
                   width={900}
                   height={900}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain"
                   priority
                 />
               </div>
@@ -69,7 +69,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <span className="inline-flex items-center gap-2 rounded-lg bg-slate-100 px-3 py-2 text-sm font-black text-slate-700">
                   <Tag size={16} /> Código {produto.codigo}
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-lg bg-emerald-50 px-3 py-2 text-sm font-black text-emerald-700">
+                <span className="inline-flex items-center gap-2 rounded-lg bg-red-50 px-3 py-2 text-sm font-black text-red-700">
                   <BadgeCheck size={16} /> {produto.subtipo}
                 </span>
               </div>
@@ -102,7 +102,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 href={whatsappUrl(produto)}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-6 inline-flex h-14 w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-5 text-base font-black text-white shadow-lg shadow-emerald-900/15 transition hover:bg-emerald-700 sm:w-fit"
+                className="mt-6 inline-flex h-14 w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-5 text-base font-black text-white shadow-lg shadow-red-900/15 transition hover:bg-red-700 sm:w-fit"
               >
                 <MessageCircle size={20} /> Consultar disponibilidade
               </a>
@@ -114,7 +114,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       {relacionados.length ? (
         <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
           <div className="mb-5 flex items-center gap-2">
-            <Boxes className="text-emerald-700" size={20} />
+            <Boxes className="text-red-700" size={20} />
             <h2 className="text-2xl font-black text-ink">Produtos relacionados</h2>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">

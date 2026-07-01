@@ -39,31 +39,19 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     <main>
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm font-black text-emerald-700">
+          <Link href="/" className="inline-flex items-center gap-2 text-sm font-black text-red-700">
             <ArrowLeft size={17} /> Voltar ao início
           </Link>
-          <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_320px] lg:items-end">
-            <div>
-              <p className="inline-flex items-center gap-2 rounded-lg bg-emerald-50 px-3 py-2 text-sm font-black uppercase tracking-wide text-emerald-800">
-                <Boxes size={17} /> Categoria
-              </p>
-              <h1 className="mt-4 text-3xl font-black leading-tight text-ink sm:text-5xl">
-                {categoria.nome}
-              </h1>
-              <p className="mt-3 max-w-2xl text-base font-semibold leading-7 text-slate-600">
-                {categoria.total} produtos organizados por subtipo para consulta rápida por código interno ou nome.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
-              <div className="rounded-lg bg-white p-4">
-                <strong className="block text-2xl font-black text-emerald-700">{categoria.total}</strong>
-                <span className="text-xs font-bold text-slate-500">Produtos</span>
-              </div>
-              <div className="rounded-lg bg-white p-4">
-                <strong className="block text-2xl font-black text-emerald-700">{categoria.subtipos.length}</strong>
-                <span className="text-xs font-bold text-slate-500">Subtipos</span>
-              </div>
-            </div>
+          <div className="mt-6">
+            <p className="inline-flex items-center gap-2 rounded-lg bg-red-50 px-3 py-2 text-sm font-black uppercase tracking-wide text-red-700">
+              <Boxes size={17} /> Categoria
+            </p>
+            <h1 className="mt-4 text-3xl font-black leading-tight text-ink sm:text-5xl">
+              {categoria.nome}
+            </h1>
+            <p className="mt-3 max-w-2xl text-base font-semibold leading-7 text-slate-600">
+              Produtos organizados por subtipo para consulta rápida por código interno ou nome.
+            </p>
           </div>
           <div className="mt-6 flex gap-2 overflow-x-auto pb-2">
             {categoria.subtipos.map((subtipo) => (

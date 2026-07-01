@@ -1,12 +1,12 @@
 # Catálogo Drogaria Espírito Santo
 
-Catálogo online profissional para produtos hospitalares da Drogaria Espírito Santo, criado com Next.js 15, TypeScript, Tailwind CSS e App Router.
+Catálogo online profissional para produtos hospitalares da Drogaria Espírito Santo, criado com Next.js 16, TypeScript, Tailwind CSS e App Router.
 
 O projeto importa a planilha `Catalogo_para_filtrar_fotos.xlsx`, gera `src/data/produtos.json` e publica rotas estáticas para home, categorias e produtos.
 
 ## Tecnologias
 
-- Next.js 15
+- Next.js 16
 - React 19
 - TypeScript
 - Tailwind CSS
@@ -58,9 +58,11 @@ src/
     types.ts
 public/
   images/
-    hero-catalogo.png
+    logo-drogaria-espirito-santo.png
   placeholders/
-    *.svg
+    *.png
+  produtos/
+    fotos reais importadas por nome
 scripts/
   import_catalog.py
 ```
@@ -89,6 +91,7 @@ Esse comando recria:
 
 - `src/data/produtos.json`
 - imagens padrão em `public/placeholders/`
+- fotos reais copiadas para `public/produtos/`, quando existirem em `C:\Users\Acer\Desktop\Fotos drogaria`
 
 ## Executar localmente
 
@@ -196,10 +199,12 @@ npm run import:catalog
 npm run build
 ```
 
-3. Faça commit das alterações em `src/data/produtos.json` e `public/placeholders/`.
+3. Faça commit das alterações em `src/data/produtos.json`, `public/placeholders/` e `public/produtos/`.
 4. Envie para o repositório.
 5. A Vercel fará novo deploy automaticamente.
 
 ## Observações sobre fotos
 
-O projeto não pesquisa imagens por EAN. Quando uma foto específica não está disponível no projeto, o catálogo usa uma imagem padrão do subtipo do produto, como andadores, bengalas, cadeiras de rodas, curativos, gazes, respiratório e nebulizadores.
+O projeto não pesquisa imagens por EAN. Para usar fotos reais, coloque os arquivos em `C:\Users\Acer\Desktop\Fotos drogaria` com o nome igual ou muito próximo ao nome do produto na planilha, por exemplo `ACH ANDADOR DESMONTAVEL (BC1546) MERCUR FAR.jpeg`. Ao rodar `npm run import:catalog`, o script copia as imagens para `public/produtos/` e vincula automaticamente no catálogo.
+
+Quando uma foto específica não está disponível, o catálogo usa uma imagem padrão em PNG do subtipo do produto, como andadores, bengalas, cadeiras de rodas, curativos, gazes, respiratório e nebulizadores.

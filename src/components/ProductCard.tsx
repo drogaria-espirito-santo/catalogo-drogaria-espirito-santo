@@ -10,7 +10,7 @@ type ProductCardProps = {
 
 export function ProductCard({ produto }: ProductCardProps) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-catalog">
+    <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-red-300 hover:shadow-catalog">
       <Link href={`/produto/${produto.codigo}`} className="block">
         <div className="aspect-square bg-slate-50 p-4">
           <Image
@@ -28,13 +28,13 @@ export function ProductCard({ produto }: ProductCardProps) {
           <span className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-1 text-xs font-black text-slate-700">
             <Tag size={13} /> {produto.codigo}
           </span>
-          <span className="rounded-md bg-emerald-50 px-2 py-1 text-xs font-bold text-emerald-700">
+          <span className="rounded-md bg-red-50 px-2 py-1 text-xs font-bold text-red-700">
             {produto.subtipo}
           </span>
         </div>
         <Link
           href={`/produto/${produto.codigo}`}
-          className="line-clamp-2 min-h-12 text-sm font-black leading-6 text-ink transition group-hover:text-emerald-700"
+          className="line-clamp-2 min-h-12 text-sm font-black leading-6 text-ink transition group-hover:text-red-700"
         >
           {produto.produto}
         </Link>
@@ -42,7 +42,7 @@ export function ProductCard({ produto }: ProductCardProps) {
         <div className="mt-auto grid grid-cols-[1fr_auto] gap-2">
           <Link
             href={`/produto/${produto.codigo}`}
-            className="inline-flex h-10 items-center justify-center rounded-lg border border-slate-200 px-3 text-sm font-black text-slate-700 transition hover:border-emerald-300 hover:text-emerald-700"
+            className="inline-flex h-10 items-center justify-center rounded-lg border border-slate-200 px-3 text-sm font-black text-slate-700 transition hover:border-red-300 hover:text-red-700"
           >
             Ver produto
           </Link>
@@ -51,7 +51,7 @@ export function ProductCard({ produto }: ProductCardProps) {
             target="_blank"
             rel="noreferrer"
             aria-label={`Consultar ${produto.produto} no WhatsApp`}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-600 text-white transition hover:bg-emerald-700"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-red-600 text-white transition hover:bg-red-700"
           >
             <MessageCircle size={18} />
           </a>

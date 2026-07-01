@@ -11,7 +11,7 @@ export function CategoryCard({ categoria }: CategoryCardProps) {
   return (
     <Link
       href={`/categoria/${categoria.slug}`}
-      className="group overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-catalog"
+      className="group overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-red-300 hover:shadow-catalog"
     >
       <div className="grid grid-cols-[92px_1fr] gap-3 p-3">
         <Image
@@ -27,7 +27,7 @@ export function CategoryCard({ categoria }: CategoryCardProps) {
           <p className="mt-2 text-sm font-semibold text-slate-500">
             {categoria.total} produtos em {categoria.subtipos.length} subtipos
           </p>
-          <span className="mt-4 inline-flex items-center gap-1 text-sm font-black text-emerald-700">
+          <span className="mt-4 inline-flex items-center gap-1 text-sm font-black text-red-700">
             Explorar <ArrowRight size={15} className="transition group-hover:translate-x-1" />
           </span>
         </div>

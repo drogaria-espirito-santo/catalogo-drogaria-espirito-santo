@@ -10,20 +10,14 @@ export default function Home() {
     <main>
       <section className="relative overflow-hidden bg-white">
         <div className="absolute inset-0">
-          <Image
-            src="/images/hero-catalogo.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/20" />
-          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-white to-transparent" />
+          <div className="absolute inset-0 bg-white" />
+          <div className="absolute right-0 top-0 hidden h-full w-[42%] bg-red-50 lg:block" />
+          <div className="absolute bottom-0 right-0 hidden h-32 w-[42%] bg-sky-100 lg:block" />
+          <div className="absolute inset-x-0 top-0 h-3 bg-red-600" />
         </div>
-        <div className="relative mx-auto grid min-h-[620px] max-w-7xl content-center px-4 py-12 sm:px-6 lg:px-8">
+        <div className="relative mx-auto grid min-h-[560px] max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_440px] lg:items-center lg:px-8">
           <div className="max-w-2xl">
-            <p className="inline-flex items-center gap-2 rounded-lg bg-emerald-50 px-3 py-2 text-sm font-black uppercase tracking-wide text-emerald-800 ring-1 ring-emerald-100">
+            <p className="inline-flex items-center gap-2 rounded-lg bg-red-50 px-3 py-2 text-sm font-black uppercase tracking-wide text-red-700 ring-1 ring-red-100">
               <CheckCircle2 size={17} /> Catálogo online
             </p>
             <h1 className="mt-5 text-4xl font-black leading-tight text-ink sm:text-6xl">
@@ -35,31 +29,40 @@ export default function Home() {
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <a
                 href="#catalogo"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-emerald-600 px-5 text-sm font-black text-white shadow-lg shadow-emerald-900/15 transition hover:bg-emerald-700"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-red-600 px-5 text-sm font-black text-white shadow-lg shadow-red-900/15 transition hover:bg-red-700"
               >
                 <Search size={18} /> Buscar produtos
               </a>
               <a
                 href="https://wa.me/5527995050105"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-5 text-sm font-black text-slate-800 transition hover:border-emerald-300 hover:text-emerald-700"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-5 text-sm font-black text-slate-800 transition hover:border-red-300 hover:text-red-700"
               >
                 <MessageCircle size={18} /> Falar no WhatsApp
               </a>
             </div>
-            <div className="mt-8 grid max-w-xl grid-cols-3 gap-3">
-              <div className="rounded-lg border border-slate-200 bg-white/85 p-4 shadow-sm">
-                <strong className="block text-2xl font-black text-emerald-700">{catalog.total}</strong>
-                <span className="text-xs font-bold text-slate-500">Produtos</span>
-              </div>
-              <div className="rounded-lg border border-slate-200 bg-white/85 p-4 shadow-sm">
-                <strong className="block text-2xl font-black text-emerald-700">{catalog.categorias.length}</strong>
-                <span className="text-xs font-bold text-slate-500">Categorias</span>
-              </div>
-              <div className="rounded-lg border border-slate-200 bg-white/85 p-4 shadow-sm">
-                <strong className="block text-2xl font-black text-emerald-700">
-                  {catalog.categorias.reduce((total, item) => total + item.subtipos.length, 0)}
-                </strong>
-                <span className="text-xs font-bold text-slate-500">Subtipos</span>
+          </div>
+
+          <div className="relative">
+            <div className="rounded-lg border border-red-100 bg-white p-4 shadow-catalog">
+              <Image
+                src="/images/logo-drogaria-espirito-santo.png"
+                alt="Drogaria Espírito Santo"
+                width={720}
+                height={144}
+                priority
+                className="h-auto w-full rounded-md"
+              />
+              <div className="mt-4 grid grid-cols-3 gap-3">
+                {catalog.categorias.slice(0, 3).map((categoria) => (
+                  <Image
+                    key={categoria.slug}
+                    src={categoria.imagem}
+                    alt=""
+                    width={180}
+                    height={180}
+                    className="aspect-square rounded-md border border-slate-100 object-cover"
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -69,10 +72,10 @@ export default function Home() {
       <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-black uppercase tracking-wide text-emerald-700">Categorias</p>
+            <p className="text-sm font-black uppercase tracking-wide text-red-700">Categorias</p>
             <h2 className="mt-1 text-2xl font-black text-ink sm:text-3xl">Encontre pelo tipo de cuidado</h2>
           </div>
-          <Link href="#catalogo" className="inline-flex items-center gap-1 text-sm font-black text-emerald-700">
+          <Link href="#catalogo" className="inline-flex items-center gap-1 text-sm font-black text-red-700">
             Ver todos <ArrowRight size={16} />
           </Link>
         </div>

@@ -50,7 +50,7 @@ export function SearchCatalog({
     <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8" id="catalogo">
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-black uppercase tracking-wide text-emerald-700">
+          <p className="text-sm font-black uppercase tracking-wide text-red-700">
             Busca instantânea
           </p>
           <h2 className="mt-1 text-2xl font-black text-ink sm:text-3xl">{title}</h2>
@@ -68,7 +68,7 @@ export function SearchCatalog({
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Buscar por código interno ou nome do produto"
-              className="h-12 w-full rounded-lg border border-slate-200 bg-slate-50 pl-10 pr-3 text-sm font-semibold outline-none transition focus:border-emerald-400 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+              className="h-12 w-full rounded-lg border border-slate-200 bg-slate-50 pl-10 pr-3 text-sm font-semibold outline-none transition focus:border-red-400 focus:bg-white focus:ring-4 focus:ring-red-100"
             />
           </label>
 
@@ -80,7 +80,7 @@ export function SearchCatalog({
                 setCategory(event.target.value);
                 setSubtype("todos");
               }}
-              className="h-12 w-full appearance-none rounded-lg border border-slate-200 bg-slate-50 pl-10 pr-3 text-sm font-black text-slate-700 outline-none transition focus:border-emerald-400 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+              className="h-12 w-full appearance-none rounded-lg border border-slate-200 bg-slate-50 pl-10 pr-3 text-sm font-black text-slate-700 outline-none transition focus:border-red-400 focus:bg-white focus:ring-4 focus:ring-red-100"
             >
               <option value="todos">Todas as categorias</option>
               {categorias.map((item) => (
@@ -94,7 +94,7 @@ export function SearchCatalog({
           <select
             value={subtype}
             onChange={(event) => setSubtype(event.target.value)}
-            className="h-12 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm font-black text-slate-700 outline-none transition focus:border-emerald-400 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+            className="h-12 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm font-black text-slate-700 outline-none transition focus:border-red-400 focus:bg-white focus:ring-4 focus:ring-red-100"
           >
             <option value="todos">Todos os subtipos</option>
             {availableSubtypes.map((item) => (
@@ -107,7 +107,7 @@ export function SearchCatalog({
           <button
             type="button"
             onClick={clearFilters}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-slate-200 px-4 text-sm font-black text-slate-700 transition hover:border-emerald-300 hover:text-emerald-700"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-slate-200 px-4 text-sm font-black text-slate-700 transition hover:border-red-300 hover:text-red-700"
           >
             <X size={17} /> Limpar
           </button>
