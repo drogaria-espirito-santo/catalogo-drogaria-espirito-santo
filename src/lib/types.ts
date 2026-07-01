@@ -18,6 +18,7 @@ export type Produto = {
   codigo: string;
   produto: string;
   produtoOriginal: string;
+  produtoBusca: string;
   categoria: string;
   categoriaSlug: string;
   subtipo: string;

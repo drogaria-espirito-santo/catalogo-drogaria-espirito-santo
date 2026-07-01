@@ -12,23 +12,23 @@ export function ProductCard({ produto }: ProductCardProps) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-red-300 hover:shadow-catalog">
       <Link href={`/produto/${produto.codigo}`} className="block">
-        <div className="aspect-square bg-slate-50 p-4">
+        <div className="aspect-square bg-white p-4">
           <Image
             src={produto.imagem}
-            alt={produto.subtipo}
+            alt={produto.produto}
             width={900}
             height={900}
-            className="h-full w-full rounded-md object-cover"
+            className="h-full w-full rounded-md object-contain transition duration-300 group-hover:scale-[1.03]"
             loading="lazy"
           />
         </div>
       </Link>
-      <div className="flex flex-1 flex-col gap-3 p-4">
+      <div className="flex flex-1 flex-col gap-3 border-t border-slate-100 p-4">
         <div className="flex items-start justify-between gap-3">
           <span className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-1 text-xs font-black text-slate-700">
             <Tag size={13} /> {produto.codigo}
           </span>
-          <span className="rounded-md bg-red-50 px-2 py-1 text-xs font-bold text-red-700">
+          <span className="line-clamp-1 rounded-md bg-red-50 px-2 py-1 text-xs font-bold text-red-700">
             {produto.subtipo}
           </span>
         </div>

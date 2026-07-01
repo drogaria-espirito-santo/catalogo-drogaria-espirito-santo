@@ -35,7 +35,7 @@ export function SearchCatalog({
     return produtos.filter((produto) => {
       const matchesCategory = category === "todos" || produto.categoriaSlug === category;
       const matchesSubtype = subtype === "todos" || produto.subtipoSlug === subtype;
-      const searchable = normalizeSearch(`${produto.codigo} ${produto.produto} ${produto.produtoOriginal}`);
+      const searchable = normalizeSearch(`${produto.codigo} ${produto.produto} ${produto.produtoBusca}`);
       return matchesCategory && matchesSubtype && (!term || searchable.includes(term));
     });
   }, [category, produtos, query, subtype]);
@@ -47,7 +47,7 @@ export function SearchCatalog({
   }
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8" id="catalogo">
+    <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8" id="catalogo">
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-black uppercase tracking-wide text-red-700">
@@ -60,7 +60,7 @@ export function SearchCatalog({
         </p>
       </div>
 
-      <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="rounded-lg border border-slate-200 border-t-red-600 bg-white p-3 shadow-sm">
         <div className="grid gap-3 lg:grid-cols-[1fr_240px_240px_auto]">
           <label className="relative block">
             <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={19} />
@@ -114,7 +114,7 @@ export function SearchCatalog({
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {filtered.map((produto) => (
           <ProductCard key={produto.id} produto={produto} />
         ))}

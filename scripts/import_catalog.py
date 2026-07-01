@@ -56,16 +56,67 @@ def clean(value: object) -> str:
     return "" if text in {"—", "-", "None"} else text
 
 
+LEADING_PREFIX_REPLACEMENTS = [
+    (re.compile(r"^MOR\.IMOB\.PULSO\s+", re.IGNORECASE), "IMOBILIZADOR DE PULSO "),
+    (re.compile(r"^MER\.BC(?:\s+BC)?[A-Z0-9.-]*\s+", re.IGNORECASE), ""),
+    (re.compile(r"^MER\.", re.IGNORECASE), ""),
+    (re.compile(r"^MOR\.", re.IGNORECASE), ""),
+    (re.compile(r"^(?:ACH|AN|ANA|MM|SCHER|TAKE|P|A)\s+", re.IGNORECASE), ""),
+    (re.compile(r"^(?:M|MA)\s+(?=(?:JOELHEIRA|TORNOZELEIRA)\b)", re.IGNORECASE), ""),
+]
+
+
+def clean_product_display_name(name: str) -> str:
+    cleaned = name.strip()
+    changed = True
+    while changed:
+        changed = False
+        for pattern, replacement in LEADING_PREFIX_REPLACEMENTS:
+            updated = pattern.sub(replacement, cleaned, count=1).strip()
+            if updated != cleaned:
+                cleaned = updated
+                changed = True
+    cleaned = re.sub(r"\s+", " ", cleaned)
+    cleaned = re.sub(r"\bC\b", "COM", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(
+        r"\bP\b(?=\s+(?:PUNHO|GESTANTE|JOELHO|OMBRO|BOLSA|MULETA|SALTO|TENNIS|TORNOZELO|DEDO|CLAVICULA)\b)",
+        "PARA",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+    term_replacements = {
+        "DESMONTAVEL": "DESMONTÁVEL",
+        "ECONOMICA": "ECONÔMICA",
+        "ORIFICIO": "ORIFÍCIO",
+        "ALUMINIO": "ALUMÍNIO",
+        "PRESSAO": "PRESSÃO",
+        "CLAVICULA": "CLAVÍCULA",
+        "ORTese": "ÓRTESE",
+        "ORTESE": "ÓRTESE",
+        "JOELHO": "JOELHO",
+        "PUNHO": "PUNHO",
+    }
+    for source, target in term_replacements.items():
+        cleaned = re.sub(rf"\b{re.escape(source)}\b", target, cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\bDR\.\s*SCHOLLS\b", "DR SCHOLLS", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\b(DIR|ESQ)\.", r"\1 ", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\s+([.,)])", r"\1", cleaned)
+    cleaned = re.sub(r"([(])\s+", r"\1", cleaned)
+    return cleaned
+
+
 def title_case_product(name: str) -> str:
-    small = {"c", "d", "de", "do", "da", "das", "dos", "em", "p", "s"}
+    small = {"c", "com", "d", "de", "do", "da", "das", "dos", "em", "para", "por", "sem"}
     out = []
-    for token in name.split():
+    for index, token in enumerate(name.split()):
         raw = token.strip()
         base = raw.lower()
-        if base in small or any(ch.isdigit() for ch in raw):
+        if base in small and index > 0:
+            out.append(base)
+        elif any(ch.isdigit() for ch in raw):
             out.append(raw)
         elif len(raw) <= 3 and raw.isalpha():
-            out.append(raw)
+            out.append(raw.upper())
         else:
             out.append(raw[:1].upper() + raw[1:].lower())
     return " ".join(out)
@@ -274,6 +325,7 @@ def main() -> None:
         if subtipo not in subtypes:
             subtypes.append(subtipo)
 
+        produto_limpo = clean_product_display_name(produto_raw)
         product_key = slugify(produto_raw)
         image_path = product_photos.get(product_key, f"/placeholders/{subtype_slug}.png")
         if image_path.startswith("/produtos/"):
@@ -282,8 +334,9 @@ def main() -> None:
         product = {
             "id": f"{codigo}-{product_key}",
             "codigo": codigo,
-            "produto": title_case_product(produto_raw),
+            "produto": title_case_product(produto_limpo),
             "produtoOriginal": produto_raw,
+            "produtoBusca": f"{produto_raw} {produto_limpo}",
             "categoria": categoria,
             "categoriaSlug": slugify(categoria),
             "subtipo": subtipo,
