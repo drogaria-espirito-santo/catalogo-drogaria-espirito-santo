@@ -29,6 +29,40 @@ CATEGORY_ORDER = [
     "Diabetes e Testes",
     "Termoterapia e Conforto",
     "Meias de Compressão",
+    "Águas Destiladas e Injetáveis",
+    "Gel Condutor",
+]
+
+SUPPLEMENTAL_PRODUCTS = [
+    ("Gel Condutor", "Gel Condutor", "97810", "GEL CONDUTOR FRASCO 320G BC1603 FR6"),
+    ("Gel Condutor", "Gel Condutor", "96467", "GEL CONDUTOR SACHE 250G"),
+    ("Gel Condutor", "Gel Condutor", "96728", "GEL CONDUTOR SACHE 5KG BC1650 SA"),
+    ("Gel Condutor", "Gel para Ultrassonografia", "66517", "GEL P/ UTRASSOM GRUNENTHAL 1KG"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "17507", "AGUA P/INJECAO 10ML"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "24668", "AGUA P/INJECAO 10ML"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "49119", "AGUA P/INJECAO 500ML"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "52766", "AGUA P/INJECAO 5ML"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "48491", "AGUA PARA INJECAO"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84550", "AGUA PARA INJECAO SOL INJ IV CX 10 BOLS PVC"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84548", "AGUA PARA INJECAO SOL INJ IV CX 12 BOLS PLAS PP"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84525", "AGUA PARA INJECAO SOL INJ IV CX 12 FR PLAS"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84526", "AGUA PARA INJECAO SOL INJ IV CX 20 BOLS PVC"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84549", "AGUA PARA INJECAO SOL INJ IV CX 20 FR PLAS"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84530", "AGUA PARA INJECAO SOL INJ IV CX 40 BOLS PLAS PP"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84527", "AGUA PARA INJECAO SOL INJ IV CX 40 FR PLAS"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84531", "AGUA PARA INJECAO SOL INJ IV CX 80 BOLS PLAS PP"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84528", "AGUA PARA INJECAO SOL INJ IV CX 80 BOLS PLAS PP"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84532", "AGUA PARA INJECAO SOL INJ IV CX 80 FR PLAS"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84533", "AGUA PARA INJETAVEIS"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84613", "AGUA PARA INJETAVEIS 250ML"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "62752", "AGUA PARA INJETAVEIS SOL INJ CX 100 AMP PLAS"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84580", "AGUA PARA INJETAVEIS SOL INJ CX 100 AMP VD INC"),
+    ("Águas Destiladas e Injetáveis", "Água para Injetáveis", "84609", "AGUA PARA INJETAVEIS SOL INJ CX 100 AMP VD INC"),
+    ("Águas Destiladas e Injetáveis", "Água Destilada", "93374", "AGUA DESTILADA 1L"),
+    ("Águas Destiladas e Injetáveis", "Água Destilada", "95502", "AGUA DESTILADA 10 ML"),
+    ("Águas Destiladas e Injetáveis", "Água Destilada", "2087", "AGUA DESTILADA 1L"),
+    ("Águas Destiladas e Injetáveis", "Água Destilada", "97923", "AGUA DESTILADA 5L ANTARES"),
+    ("Águas Destiladas e Injetáveis", "Água Destilada", "93949", "AGUA DESTILADA GL 5 LITROS"),
 ]
 
 BRAND_RED = "#ff1717"
@@ -56,26 +90,8 @@ def clean(value: object) -> str:
     return "" if text in {"—", "-", "None"} else text
 
 
-LEADING_PREFIX_REPLACEMENTS = [
-    (re.compile(r"^MOR\.IMOB\.PULSO\s+", re.IGNORECASE), "IMOBILIZADOR DE PULSO "),
-    (re.compile(r"^MER\.BC(?:\s+BC)?[A-Z0-9.-]*\s+", re.IGNORECASE), ""),
-    (re.compile(r"^MER\.", re.IGNORECASE), ""),
-    (re.compile(r"^MOR\.", re.IGNORECASE), ""),
-    (re.compile(r"^(?:ACH|AN|ANA|MM|SCHER|TAKE|P|A)\s+", re.IGNORECASE), ""),
-    (re.compile(r"^(?:M|MA)\s+(?=(?:JOELHEIRA|TORNOZELEIRA)\b)", re.IGNORECASE), ""),
-]
-
-
 def clean_product_display_name(name: str) -> str:
     cleaned = name.strip()
-    changed = True
-    while changed:
-        changed = False
-        for pattern, replacement in LEADING_PREFIX_REPLACEMENTS:
-            updated = pattern.sub(replacement, cleaned, count=1).strip()
-            if updated != cleaned:
-                cleaned = updated
-                changed = True
     cleaned = re.sub(r"\s+", " ", cleaned)
     cleaned = re.sub(r"\bC\b", "COM", cleaned, flags=re.IGNORECASE)
     cleaned = re.sub(
@@ -85,16 +101,21 @@ def clean_product_display_name(name: str) -> str:
         flags=re.IGNORECASE,
     )
     term_replacements = {
-        "DESMONTAVEL": "DESMONTÁVEL",
-        "ECONOMICA": "ECONÔMICA",
-        "ORIFICIO": "ORIFÍCIO",
-        "ALUMINIO": "ALUMÍNIO",
-        "PRESSAO": "PRESSÃO",
-        "CLAVICULA": "CLAVÍCULA",
-        "ORTese": "ÓRTESE",
-        "ORTESE": "ÓRTESE",
+        "DESMONTAVEL": "DESMONT\u00c1VEL",
+        "ECONOMICA": "ECON\u00d4MICA",
+        "ORIFICIO": "ORIF\u00cdCIO",
+        "ALUMINIO": "ALUM\u00cdNIO",
+        "PRESSAO": "PRESS\u00c3O",
+        "CLAVICULA": "CLAV\u00cdCULA",
+        "ORTese": "\u00d3RTESE",
+        "ORTESE": "\u00d3RTESE",
         "JOELHO": "JOELHO",
         "PUNHO": "PUNHO",
+        "AGUA": "\u00c1GUA",
+        "INJECAO": "INJE\u00c7\u00c3O",
+        "INJETAVEIS": "INJET\u00c1VEIS",
+        "UTRASSOM": "ULTRASSOM",
+        "ULTRASSONOGRAFIA": "ULTRASSONOGRAFIA",
     }
     for source, target in term_replacements.items():
         cleaned = re.sub(rf"\b{re.escape(source)}\b", target, cleaned, flags=re.IGNORECASE)
@@ -115,6 +136,10 @@ def title_case_product(name: str) -> str:
             out.append(base)
         elif any(ch.isdigit() for ch in raw):
             out.append(raw)
+        elif "/" in raw:
+            out.append(raw.upper())
+        elif "." in raw:
+            out.append(raw.upper())
         elif len(raw) <= 3 and raw.isalpha():
             out.append(raw.upper())
         else:
@@ -216,6 +241,21 @@ def draw_icon(draw: ImageDraw.ImageDraw, label: str) -> None:
         draw.line((520, 220, 625, 450), fill=dark, width=stroke)
         draw.ellipse((500, 455, 660, 615), fill="#ffe4e6", outline=red, width=stroke)
         draw_cross(draw, 580, 535, 70, red)
+        return
+
+    if "agua" in key or "injecao" in key or "injetaveis" in key or "destilada" in key:
+        draw.rounded_rectangle((330, 210, 570, 670), radius=52, fill="#ffffff", outline=blue, width=stroke)
+        draw.rounded_rectangle((380, 150, 520, 245), radius=24, fill="#dbeafe", outline=blue, width=18)
+        draw.rectangle((360, 360, 540, 555), fill="#e0f2fe")
+        draw.line((380, 410, 520, 410), fill=red, width=14)
+        draw.line((450, 340, 450, 480), fill=red, width=14)
+        return
+
+    if "gel" in key or "condutor" in key or "ultrassom" in key or "ultrassonografia" in key:
+        draw.rounded_rectangle((245, 300, 655, 620), radius=58, fill="#ffffff", outline=blue, width=stroke)
+        draw.rounded_rectangle((300, 240, 600, 345), radius=38, fill="#ffe4e6", outline=pink, width=18)
+        draw.arc((320, 410, 580, 580), 190, 350, fill=red, width=18)
+        draw.ellipse((390, 455, 510, 575), fill="#e0f2fe", outline=blue, width=14)
         return
 
     if "pressao" in key or "termometro" in key or "oximetro" in key or "estetoscopio" in key:
@@ -347,6 +387,43 @@ def main() -> None:
             "whatsapp": "5527995050105",
         }
         products.append(product)
+
+    for categoria, subtipo, codigo, produto_raw in SUPPLEMENTAL_PRODUCTS:
+        codigo = re.sub(r"\.0$", "", codigo)
+        base_code = codigo
+        suffix = 2
+        while codigo in seen_codes:
+            codigo = f"{base_code}-{suffix}"
+            suffix += 1
+        seen_codes.add(codigo)
+
+        subtype_slug = slugify(subtipo)
+        if subtipo not in subtypes:
+            subtypes.append(subtipo)
+
+        produto_limpo = clean_product_display_name(produto_raw)
+        product_key = slugify(produto_raw)
+        image_path = product_photos.get(product_key, f"/placeholders/{subtype_slug}.png")
+        if image_path.startswith("/produtos/"):
+            real_photo_count += 1
+
+        products.append(
+            {
+                "id": f"{codigo}-{product_key}",
+                "codigo": codigo,
+                "produto": title_case_product(produto_limpo),
+                "produtoOriginal": produto_raw,
+                "produtoBusca": f"{produto_raw} {produto_limpo}",
+                "categoria": categoria,
+                "categoriaSlug": slugify(categoria),
+                "subtipo": subtipo,
+                "subtipoSlug": subtype_slug,
+                "variante": "",
+                "temFotoHoje": False,
+                "imagem": image_path,
+                "whatsapp": "5527995050105",
+            }
+        )
 
     categories = []
     for category in CATEGORY_ORDER:

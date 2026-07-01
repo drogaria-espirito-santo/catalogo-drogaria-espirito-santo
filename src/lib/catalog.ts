@@ -18,7 +18,16 @@ export function findProduto(codigo: string) {
 }
 
 export function whatsappUrl(produto: Produto) {
-  const message = `Olá!\n\nTenho interesse no produto:\n\nCódigo: ${produto.codigo}\n\nProduto: ${produto.produto}\n\nPoderia me informar disponibilidade?`;
+  const message = `Olá!
+
+Tenho interesse no produto:
+
+Código: ${produto.codigo}
+
+Produto: ${produto.produto}
+
+Poderia me informar disponibilidade?`;
+
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
